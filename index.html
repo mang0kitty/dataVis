@@ -10,13 +10,14 @@
     />
     <link rel="stylesheet" type="text/css" href="/reset.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
-    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
-    <!-- <script type="text/javascript" src="shim.min.js"></script> -->
+    <!-- <script type="text/javascript" src="d3.min.js"></script> -->
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="/script.js"></script>
     <script
       type="text/javascript"
       src="/node_modules/xlsx/xlsx.mini.js"
     ></script>
-    <script type="text/javascript" src="/script.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   </head>
   <body>
     <h2 class="title">
@@ -31,13 +32,35 @@
       East
     </h2>
 
-    <h3 class="subtitle left">
-      April 1855 - March 1586
-    </h3>
+    <div class="left">
+      <h3 class="subtitle">
+        2.
+        <br />
+        April 1855 - March 1586
+      </h3>
 
-    <h3 class="subtitle right">
-      April 1854 - March 1585
-    </h3>
+      <div id="chart_new" class="chart-container"></div>
+
+      <p>
+        The Areas of the blue, red, & black wedges are each measured from the centre as the common vertex.
+
+The blue wedges measured from the centre of the circle represent area for area the deaths from Preventible or Mitigable Zymotic Diseases, the red wedges measured from the center the deaths from wounds, & the black wedges measured from the center the deaths from all other causes.
+
+In October 1844, & April 1855, the black area coincides with the red, in January & February 1856, the blue coincides with the black.
+
+The entire areas may be compared by following the blue, the red & the black lines enclosing them.
+      </p>
+    </div>
+
+    <div class="right">
+      <h3 class="subtitle">
+        1.
+        <br />
+        April 1854 - March 1585
+      </h3>
+
+      <div id="chart_old" class="chart-container"></div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>

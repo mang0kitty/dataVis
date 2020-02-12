@@ -36,6 +36,7 @@ h1 {
 .caption,
 .label,
 .legend,
+p,
 figure {
   font-family: baskerville, serif;
 }
@@ -54,6 +55,7 @@ figure {
   display: block;
   margin: 0 auto;
   margin-top: 50px;
+  text-decoration: underline;
 }
 
 .title small {
@@ -62,18 +64,20 @@ figure {
 
 .subtitle {
   font-size: 16px;
-  width: 50%;
   min-width: 400px;
   margin-top: 16px;
   text-align: center;
+  text-decoration: underline;
 }
 
-.subtitle.left {
+.left {
   float: left;
+  width: 25%;
 }
 
-.subtitle.right {
+.right {
   float: right;
+  width: 75%;
 }
 
 .caption {
@@ -138,4 +142,45 @@ figure {
   margin: 0 auto;
   left: -30px; /* hacky */
   top: -100px;
+}
+
+.chart-container {
+  margin: 50px;
+  min-height: 100vh;
+}
+
+.left .chart-container {
+  min-height: 350px;
+}
+
+.left p {
+  text-align: center;
+  margin: 50px;
+}
+
+.chart {
+  font-family: "Cabin", sans-serif;
+  font-size: 14px;
+  fill: #474747;
+  font-weight: normal;
+}
+
+.chart-graph {
+}
+
+.chart-wedge {
+  stroke: #aaa;
+  stroke-width: 1px;
+}
+
+.chart-wedge__wounds {
+  fill: rgb(252, 112, 147);
+}
+
+.chart-wedge__diseases {
+  fill: rgb(198, 226, 255);
+}
+
+.chart-wedge__other {
+  fill: rgb(50, 50, 50);
 }
