@@ -1,50 +1,21 @@
-/* Apply a natural box layout model to all elements */
-* {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: "Cabin", sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  color: #474747;
   width: 100%;
   min-height: 100%;
 }
 
-figure {
-  position: relative;
-  float: right;
-  width: 50%;
-  min-width: 400px;
-  margin-top: -120px;
+.title,
+.subtitle {
+  font-family: "Baskerville", san-serif;
+  font-style: italic;
 }
-
-h1 {
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 24px;
+p {
+  font-family: "Rochester", cursive;
+  font-style: italic;
 }
 
 .title,
 .subtitle,
-.caption,
-.label,
-.legend,
-p,
-figure {
-  font-family: baskerville, serif;
-}
-
-.title,
-.subtitle,
-.label,
-.legend {
+.label {
   text-transform: uppercase;
 }
 
@@ -56,10 +27,6 @@ figure {
   margin: 0 auto;
   margin-top: 50px;
   text-decoration: underline;
-}
-
-.title small {
-  font-size: 12px;
 }
 
 .subtitle {
@@ -80,68 +47,14 @@ figure {
   width: 75%;
 }
 
-.caption {
-  position: relative;
-  top: -170px;
-  width: 320px;
-  display: block;
-  margin: 0 auto;
-  font-style: oblique;
-  font-size: 12px;
-}
-
-.caption p {
+p {
   margin: 0;
   text-indent: 12px;
 }
 
-.canvas {
-  font-family: "Cabin", sans-serif;
-  font-size: 14px;
-  fill: #474747;
-  font-weight: normal;
-}
-
-.wedge {
-  stroke: #aaa;
-  stroke-width: 1px;
-  /*shape-rendering: crispEdges;*/
-}
-
 .label {
   font-size: 8px;
-}
-
-.disease {
-  fill: rgb(198, 226, 255);
-}
-
-.other {
-  fill: rgb(50, 50, 50);
-}
-
-.wounds {
-  fill: rgb(252, 112, 147);
-}
-
-.legend {
-  width: 400px;
-  height: 50px;
-  padding: 0 20px;
-  display: block;
-  position: relative;
-  margin: 0 auto;
-  top: -150px;
-  text-align: center;
-}
-
-.slider {
-  width: 400px;
-  display: block;
-  position: relative;
-  margin: 0 auto;
-  left: -30px; /* hacky */
-  top: -100px;
+  font-family: "Baskerville", san-serif;
 }
 
 .chart-container {
