@@ -1,0 +1,99 @@
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+.title,
+.subtitle {
+  font-family: "Baskerville", san-serif;
+  font-style: italic;
+}
+p {
+  font-family: "Rochester", cursive;
+  font-style: italic;
+}
+
+.title,
+.subtitle,
+.label {
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 18px;
+  width: 400px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-decoration: underline;
+}
+
+.subtitle {
+  font-size: 16px;
+  min-width: 400px;
+  margin-top: 16px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.left {
+  float: left;
+  width: 25%;
+}
+
+.right {
+  float: right;
+  width: 75%;
+}
+
+p {
+  margin: 0;
+  text-indent: 12px;
+}
+
+.label {
+  font-size: 8px;
+  font-family: "Baskerville", san-serif;
+}
+
+.chart-container {
+  margin: 50px;
+  min-height: 100vh;
+}
+
+.left .chart-container {
+  min-height: 350px;
+}
+
+.left p {
+  text-align: center;
+  margin: 50px;
+}
+
+.chart {
+  font-family: "Cabin", sans-serif;
+  font-size: 14px;
+  fill: #474747;
+  font-weight: normal;
+}
+
+.chart-graph {
+}
+
+.chart-wedge {
+  stroke: #aaa;
+  stroke-width: 1px;
+}
+
+.chart-wedge__wounds {
+  fill: rgb(252, 112, 147);
+}
+
+.chart-wedge__diseases {
+  fill: rgb(198, 226, 255);
+}
+
+.chart-wedge__other {
+  fill: rgb(50, 50, 50);
+}
