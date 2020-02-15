@@ -1,6 +1,9 @@
 function drawLine(data, canvas) {
-  const widthScale = 0.000003;
-  return canvas
+  const widthScale = 0.000001;
+
+  const linesLayer = canvas.append("svg:g");
+
+  linesLayer
     .selectAll("line")
     .data(data)
     .enter()
@@ -11,9 +14,13 @@ function drawLine(data, canvas) {
     .attr("y2", (d, i) => -(data[i + 1] || d).lat_p)
     .attr("class", d => (d.direction == "A" ? "advance-line" : "retreat-line"))
     .attr("stroke-width", d => d.surv * widthScale);
+
+  return linesLayer;
 }
 function drawCityText(data, canvas) {
-  return canvas
+  const citiesLayer = canvas.append("svg:g");
+
+  citiesLayer
     .selectAll("text")
     .data(data)
     .enter()
@@ -22,6 +29,8 @@ function drawCityText(data, canvas) {
     .attr("y", d => -d.lat_city)
     .attr("class", "city-text")
     .text(d => d.city);
+
+  return citiesLayer;
 }
 function drawCanvas() {
   return d3
@@ -30,9 +39,11 @@ function drawCanvas() {
     .attr("viewBox", "22 -58 20 6")
     .attr("class", "canvas");
 }
+
 function renderGraph(data) {
   const canvas = drawCanvas();
-  const troopLines = drawLine(data.troops, canvas);
+  const troopLinesLayer = drawLine(data.troops, canvas);
+  troopLinesLayer.selectAll("line.advance-line").raise();
   const cityText = drawCityText(data.cities, canvas);
 }
 function loadData() {
