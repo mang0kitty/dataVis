@@ -1,506 +1,503 @@
 {
   "cities": [
     {
-      "city": "Kowno",
-      "lon_city": 24,
-      "lat_city": 55
+      "lng": 24,
+      "lat": 55,
+      "name": "Kowno"
     },
     {
-      "city": "Wilna",
-      "lon_city": 25.3,
-      "lat_city": 54.7
+      "lng": 25.3,
+      "lat": 54.7,
+      "name": "Wilna"
     },
     {
-      "city": "Smorgoni",
-      "lon_city": 26.4,
-      "lat_city": 54.4
+      "lng": 26.4,
+      "lat": 54.4,
+      "name": "Smorgoni"
     },
     {
-      "city": "Molodexno",
-      "lon_city": 26.8,
-      "lat_city": 54.3
+      "lng": 26.8,
+      "lat": 54.3,
+      "name": "Molodexno"
     },
     {
-      "city": "Gloubokoe",
-      "lon_city": 27.7,
-      "lat_city": 55.2
+      "lng": 27.7,
+      "lat": 55.2,
+      "name": "Gloubokoe"
     },
     {
-      "city": "Minsk",
-      "lon_city": 27.6,
-      "lat_city": 53.9
+      "lng": 27.6,
+      "lat": 53.9,
+      "name": "Minsk"
     },
     {
-      "city": "Studienska",
-      "lon_city": 28.5,
-      "lat_city": 54.3
+      "lng": 28.5,
+      "lat": 54.3,
+      "name": "Studienska"
     },
     {
-      "city": "Polotz",
-      "lon_city": 28.7,
-      "lat_city": 55.5
+      "lng": 28.7,
+      "lat": 55.5,
+      "name": "Polotzk"
     },
     {
-      "city": "Bobr",
-      "lon_city": 29.2,
-      "lat_city": 54.4
+      "lng": 29.2,
+      "lat": 54.4,
+      "name": "Bobr"
     },
     {
-      "city": "Witebsk",
-      "lon_city": 30.2,
-      "lat_city": 55.3
+      "lng": 30.2,
+      "lat": 55.3,
+      "name": "Witebsk"
     },
     {
-      "city": "Orscha",
-      "lon_city": 30.4,
-      "lat_city": 54.5
+      "lng": 30.4,
+      "lat": 54.5,
+      "name": "Orscha"
     },
     {
-      "city": "Mohilow",
-      "lon_city": 30.4,
-      "lat_city": 53.9
+      "lng": 30.4,
+      "lat": 53.9,
+      "name": "Mohilow"
     },
     {
-      "city": "Smolensk",
-      "lon_city": 32,
-      "lat_city": 54.8
+      "lng": 32,
+      "lat": 54.8,
+      "name": "Smolensk"
     },
     {
-      "city": "Dorogobouge",
-      "lon_city": 33.2,
-      "lat_city": 54.9
+      "lng": 33.2,
+      "lat": 54.9,
+      "name": "Dorogobouge"
     },
     {
-      "city": "Wixma",
-      "lon_city": 34.3,
-      "lat_city": 55.2
+      "lng": 34.3,
+      "lat": 55.2,
+      "name": "Wixma"
     },
     {
-      "city": "Chjat",
-      "lon_city": 34.4,
-      "lat_city": 55.5
+      "lng": 34.4,
+      "lat": 55.5,
+      "name": "Chjat"
     },
     {
-      "city": "Mojaisk",
-      "lon_city": 36,
-      "lat_city": 55.5
+      "lng": 36,
+      "lat": 55.5,
+      "name": "Mojaisk"
     },
     {
-      "city": "Moscou",
-      "lon_city": 37.6,
-      "lat_city": 55.8
+      "lng": 37.6,
+      "lat": 55.8,
+      "name": "Moscou"
     },
     {
-      "city": "Tarantino",
-      "lon_city": 36.6,
-      "lat_city": 55.3
+      "lng": 36.6,
+      "lat": 55.3,
+      "name": "Tarantino"
     },
     {
-      "city": "Malo-jarosewli",
-      "lon_city": 36.5,
-      "lat_city": 55
+      "lng": 36.5,
+      "lat": 55,
+      "name": "Malo-jarosewli"
     }
   ],
   "temperatures": [
     {
-      "day": 18,
-      "month": "October",
+      "lng": 37.6,
+      "temp": 0,
       "days": 6,
-      "lon_temp": 37.6,
-      "temp": 0
+      "month": "Oct",
+      "day": 18
     },
     {
-      "day": 24,
-      "month": "October",
+      "lng": 36.0,
+      "temp": 0,
       "days": 6,
-      "lon_temp": 36,
-      "temp": 0
+      "month": "Oct",
+      "day": 24
     },
     {
-      "day": 9,
-      "month": "November",
+      "lng": 33.2,
+      "temp": -9,
       "days": 16,
-      "lon_temp": 33.2,
-      "temp": -9
+      "month": "Nov",
+      "day": 9
     },
     {
-      "day": 14,
-      "month": "November",
+      "lng": 32.0,
+      "temp": -21,
       "days": 5,
-      "lon_temp": 32,
-
-      "temp": -21
+      "month": "Nov",
+      "day": 14
     },
     {
-      "day": null,
-      "month": null,
-      "days": 10,
-      "lon_temp": 29.2,
-      "temp": -11
+      "lng": 29.2,
+      "temp": -11,
+      "days": 10
     },
     {
-      "day": 28,
-      "month": "November",
+      "lng": 28.5,
+      "temp": -20,
       "days": 4,
-      "lon_temp": 28.5,
-      "temp": -20
+      "month": "Nov",
+      "day": 28
     },
     {
-      "day": 1,
-      "month": "December",
+      "lng": 27.2,
+      "temp": -24,
       "days": 3,
-      "lon_temp": 27.2,
-      "temp": -24
+      "month": "Dec",
+      "day": 1
     },
     {
-      "day": 6,
-      "month": "December",
+      "lng": 26.7,
+      "temp": -30,
       "days": 5,
-      "lon_temp": 26.7,
-      "temp": -30
+      "month": "Dec",
+      "day": 6
     },
     {
-      "day": 7,
-      "month": "December",
+      "lng": 25.3,
+      "temp": -26,
       "days": 1,
-      "lon_temp": 25.3,
-      "temp": -26
+      "month": "Dec",
+      "day": 7
     }
   ],
-  "troops": [
+  "movements": [
     {
-      "lon_p": 24,
-      "lat_p": 54.9,
-      "surv": 340000,
+      "lng": 24.0,
+      "lat": 54.9,
+      "survivors": 340000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 24.5,
-      "lat_p": 55,
-      "surv": 340000,
+      "lng": 24.5,
+      "lat": 55.0,
+      "survivors": 340000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 25.5,
-      "lat_p": 54.5,
-      "surv": 340000,
+      "lng": 25.5,
+      "lat": 54.5,
+      "survivors": 340000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 26,
-      "lat_p": 54.7,
-      "surv": 320000,
+      "lng": 26.0,
+      "lat": 54.7,
+      "survivors": 320000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 27,
-      "lat_p": 54.8,
-      "surv": 300000,
+      "lng": 27.0,
+      "lat": 54.8,
+      "survivors": 300000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 28,
-      "lat_p": 54.9,
-      "surv": 280000,
+      "lng": 28.0,
+      "lat": 54.9,
+      "survivors": 280000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 28.5,
-      "lat_p": 55,
-      "surv": 240000,
+      "lng": 28.5,
+      "lat": 55.0,
+      "survivors": 240000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 29,
-      "lat_p": 55.1,
-      "surv": 210000,
+      "lng": 29.0,
+      "lat": 55.1,
+      "survivors": 210000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 30,
-      "lat_p": 55.2,
-      "surv": 180000,
+      "lng": 30.0,
+      "lat": 55.2,
+      "survivors": 180000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 30.3,
-      "lat_p": 55.3,
-      "surv": 145000,
+      "lng": 30.3,
+      "lat": 55.3,
+      "survivors": 175000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 32,
-      "lat_p": 54.8,
-      "surv": 140000,
+      "lng": 32.0,
+      "lat": 54.8,
+      "survivors": 145000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 33.2,
-      "lat_p": 55.3,
-      "surv": 127100,
+      "lng": 33.2,
+      "lat": 54.9,
+      "survivors": 140000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 34.4,
-      "lat_p": 54.8,
-      "surv": 100000,
+      "lng": 34.4,
+      "lat": 55.5,
+      "survivors": 127100,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 35.5,
-      "lat_p": 54.9,
-      "surv": 100000,
+      "lng": 35.5,
+      "lat": 55.4,
+      "survivors": 100000,
       "direction": "A",
       "division": 1
     },
     {
-      "lon_p": 36,
-      "lat_p": 55.5,
-      "surv": 100000,
+      "lng": 36.0,
+      "lat": 55.5,
+      "survivors": 100000,
+      "direction": "A",
+      "division": 1
+    },
+    {
+      "lng": 37.6,
+      "lat": 55.8,
+      "survivors": 100000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 37.6,
-      "lat_p": 55.8,
-      "surv": 98000,
+      "lng": 37.5,
+      "lat": 55.7,
+      "survivors": 98000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 37.5,
-      "lat_p": 55.7,
-      "surv": 97000,
+      "lng": 37.0,
+      "lat": 55.0,
+      "survivors": 97000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 37,
-      "lat_p": 55,
-      "surv": 96000,
+      "lng": 36.8,
+      "lat": 55.0,
+      "survivors": 96000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 36.8,
-      "lat_p": 55,
-      "surv": 87000,
+      "lng": 35.4,
+      "lat": 55.3,
+      "survivors": 87000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 35.4,
-      "lat_p": 55.3,
-      "surv": 55000,
+      "lng": 34.3,
+      "lat": 55.2,
+      "survivors": 55000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 34.3,
-      "lat_p": 55.2,
-      "surv": 37000,
+      "lng": 33.3,
+      "lat": 54.8,
+      "survivors": 37000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 33.3,
-      "lat_p": 54.8,
-      "surv": 24000,
+      "lng": 32.0,
+      "lat": 54.6,
+      "survivors": 24000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 32,
-      "lat_p": 54.6,
-      "surv": 20000,
+      "lng": 30.4,
+      "lat": 54.4,
+      "survivors": 20000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 30.4,
-      "lat_p": 54.4,
-      "surv": 20000,
+      "lng": 29.2,
+      "lat": 54.4,
+      "survivors": 20000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 29.2,
-      "lat_p": 54.4,
-      "surv": 20000,
+      "lng": 28.5,
+      "lat": 54.3,
+      "survivors": 20000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 28.5,
-      "lat_p": 54.3,
-      "surv": 20000,
+      "lng": 28.3,
+      "lat": 54.4,
+      "survivors": 20000,
       "direction": "R",
       "division": 1
     },
     {
-      "lon_p": 28.3,
-      "lat_p": 54.4,
-      "surv": 60000,
-      "direction": "A",
-      "division": 2
-    },
-    {
-      "lon_p": 24,
-      "lat_p": 55.1,
-      "surv": 60000,
-      "direction": "A",
-      "division": 2
-    },
-    {
-      "lon_p": 24.5,
-      "lat_p": 55.2,
-      "surv": 60000,
+      "lng": 24.0,
+      "lat": 55.1,
+      "survivors": 60000,
       "direction": "A",
       "division": 2
     },
     {
-      "lon_p": 25.5,
-      "lat_p": 54.7,
-      "surv": 40000,
+      "lng": 24.5,
+      "lat": 55.2,
+      "survivors": 60000,
       "direction": "A",
       "division": 2
     },
     {
-      "lon_p": 26.6,
-      "lat_p": 55.7,
-      "surv": 33000,
+      "lng": 25.5,
+      "lat": 54.7,
+      "survivors": 60000,
+      "direction": "A",
+      "division": 2
+    },
+    {
+      "lng": 26.6,
+      "lat": 55.7,
+      "survivors": 40000,
+      "direction": "A",
+      "division": 2
+    },
+    {
+      "lng": 27.4,
+      "lat": 55.6,
+      "survivors": 33000,
+      "direction": "A",
+      "division": 2
+    },
+    {
+      "lng": 28.7,
+      "lat": 55.5,
+      "survivors": 30000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 27.4,
-      "lat_p": 55.6,
-      "surv": 30000,
+      "lng": 29.2,
+      "lat": 54.3,
+      "survivors": 30000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 28.7,
-      "lat_p": 55.5,
-      "surv": 30000,
+      "lng": 28.5,
+      "lat": 54.2,
+      "survivors": 30000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 29.2,
-      "lat_p": 54.3,
-      "surv": 30000,
+      "lng": 28.3,
+      "lat": 54.3,
+      "survivors": 28000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 28.5,
-      "lat_p": 54.2,
-      "surv": 28000,
+      "lng": 27.5,
+      "lat": 54.5,
+      "survivors": 20000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 28.3,
-      "lat_p": 54.3,
-      "surv": 20000,
+      "lng": 26.8,
+      "lat": 54.3,
+      "survivors": 12000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 27.5,
-      "lat_p": 54.5,
-      "surv": 12000,
+      "lng": 26.4,
+      "lat": 54.4,
+      "survivors": 14000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 26.8,
-      "lat_p": 54.3,
-      "surv": 14000,
+      "lng": 24.6,
+      "lat": 54.5,
+      "survivors": 8000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 26.4,
-      "lat_p": 54.4,
-      "surv": 8000,
+      "lng": 24.4,
+      "lat": 54.4,
+      "survivors": 4000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 24.6,
-      "lat_p": 54.5,
-      "surv": 4000,
+      "lng": 24.2,
+      "lat": 54.4,
+      "survivors": 4000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 24.4,
-      "lat_p": 54.4,
-      "surv": 4000,
+      "lng": 24.1,
+      "lat": 54.3,
+      "survivors": 4000,
       "direction": "R",
       "division": 2
     },
     {
-      "lon_p": 24.2,
-      "lat_p": 54.4,
-      "surv": 4000,
-      "direction": "R",
-      "division": 2
-    },
-    {
-      "lon_p": 24.1,
-      "lat_p": 54.3,
-      "surv": 22000,
+      "lng": 24.0,
+      "lat": 55.2,
+      "survivors": 22000,
       "direction": "A",
       "division": 3
     },
     {
-      "lon_p": 24,
-      "lat_p": 55.2,
-      "surv": 22000,
+      "lng": 24.5,
+      "lat": 55.3,
+      "survivors": 22000,
       "direction": "A",
       "division": 3
     },
     {
-      "lon_p": 24.5,
-      "lat_p": 55.3,
-      "surv": 22000,
-      "direction": "A",
-      "division": 3
-    },
-    {
-      "lon_p": 24.6,
-      "lat_p": 55.8,
-      "surv": 6000,
+      "lng": 24.6,
+      "lat": 55.8,
+      "survivors": 6000,
       "direction": "R",
       "division": 3
     },
     {
-      "lon_p": 24.2,
-      "lat_p": 54.4,
-      "surv": 6000,
+      "lng": 24.2,
+      "lat": 54.4,
+      "survivors": 6000,
       "direction": "R",
       "division": 3
     },
     {
-      "lon_p": 24.1,
-      "lat_p": 54.3,
-      "surv": 6000,
+      "lng": 24.1,
+      "lat": 54.3,
+      "survivors": 6000,
       "direction": "R",
       "division": 3
     }
