@@ -24,3 +24,11 @@ body {
   font-size: 0.15px;
   fill: black;
 }
+.temperature-line {
+  stroke: black;
+  stroke-width: 0.01px;
+}
+
+.temp-text {
+  font-size: 0.15px;
+}
