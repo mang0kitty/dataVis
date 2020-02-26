@@ -3,102 +3,150 @@
     {
       "lng": 24,
       "lat": 55,
-      "name": "Kowno"
+      "lngOffset": 0.1,
+      "latOffset": -0.1,
+      "name": "Kowno",
+      "font": "0.75px"
     },
     {
       "lng": 25.3,
       "lat": 54.7,
-      "name": "Wilna"
+      "lngOffset": 0,
+      "latOffset": -0.15,
+      "name": "Wilna",
+      "font": "0.75px"
     },
     {
       "lng": 26.4,
       "lat": 54.4,
-      "name": "Smorgoni"
+      "lngOffset": 0.05,
+      "latOffset": 0.03,
+      "name": "Smorgoni",
+      "font": "0.75px"
     },
     {
       "lng": 26.8,
       "lat": 54.3,
-      "name": "Molodexno"
+      "lngOffset": -0.1,
+      "latOffset": -0.1,
+      "name": "Molodexno",
+      "font": "0.75px"
     },
     {
       "lng": 27.7,
       "lat": 55.2,
-      "name": "Gloubokoe"
+      "name": "Gloubokoe",
+      "font": "0.75px"
     },
     {
       "lng": 27.6,
       "lat": 53.9,
-      "name": "Minsk"
+      "lngOffset": 0.0,
+      "latOffset": -0.3,
+      "name": "Minsk",
+      "font": "0.75px"
     },
     {
       "lng": 28.5,
       "lat": 54.3,
-      "name": "Studienska"
+      "lngOffset": -0.4,
+      "latOffset": -0.25,
+      "name": "Studienska",
+      "font": "0.75px"
     },
     {
       "lng": 28.7,
       "lat": 55.5,
-      "name": "Polotzk"
+      "lngOffset": -0.3,
+      "latOffset": 0.1,
+      "name": "Polotzk",
+      "font": "0.75px"
     },
     {
       "lng": 29.2,
       "lat": 54.4,
-      "name": "Bobr"
+      "lngOffset": 0.1,
+      "latOffset": -0.2,
+      "name": "Bobr",
+      "font": "0.75px"
     },
     {
       "lng": 30.2,
       "lat": 55.3,
-      "name": "Witebsk"
+      "name": "Witebsk",
+      "font": "0.75px"
     },
     {
       "lng": 30.4,
       "lat": 54.5,
-      "name": "Orscha"
+      "name": "Orscha",
+      "font": "0.75px"
     },
     {
       "lng": 30.4,
       "lat": 53.9,
-      "name": "Mohilow"
+      "name": "Mohilow",
+      "font": "0.75px"
     },
     {
       "lng": 32,
       "lat": 54.8,
-      "name": "Smolensk"
+      "lngOffset": -0.2,
+      "latOffset": -0.05,
+      "name": "Smolensk",
+      "font": "0.75px"
     },
     {
       "lng": 33.2,
       "lat": 54.9,
-      "name": "Dorogobouge"
+      "lngOffset": -0.6,
+      "latOffset": 0,
+      "name": "Dorogobouge",
+      "font": "0.75px"
     },
     {
       "lng": 34.3,
       "lat": 55.2,
-      "name": "Wixma"
+      "name": "Wixma",
+      "font": "0.75px"
     },
     {
       "lng": 34.4,
       "lat": 55.5,
-      "name": "Chjat"
+      "name": "Chjat",
+      "font": "0.75px"
     },
     {
       "lng": 36,
       "lat": 55.5,
-      "name": "Mojaisk"
+      "lngOffset": -0.3,
+      "latOffset": -0.18,
+      "name": "Mojaisk",
+      "font": "0.75px"
     },
     {
       "lng": 37.6,
       "lat": 55.8,
-      "name": "Moscou"
+      "lngOffset": -0.3,
+      "latOffset": 0.1,
+      "name": "Moscou",
+      "font": "1.5px"
     },
     {
       "lng": 36.6,
       "lat": 55.3,
-      "name": "Tarantino"
+      "lngOffset": 0.8,
+      "latOffset": 0,
+      "name": "Tarantino",
+      "font": "0.75px"
     },
     {
       "lng": 36.5,
       "lat": 55,
-      "name": "Malo-jarosewli"
+      "lngOffset": 0.4,
+      "latOffset": -0.15,
+      "name": "Malo-jarosewli",
+      "font": "0.75px"
     }
   ],
   "temperatures": [
@@ -106,28 +154,29 @@
       "lng": 37.6,
       "temp": 0,
       "days": 6,
-      "month": "Oct",
+      "month": "October",
       "day": 18
     },
     {
       "lng": 36.0,
       "temp": 0,
       "days": 6,
-      "month": "Oct",
+      "month": "October",
+
       "day": 24
     },
     {
       "lng": 33.2,
       "temp": -9,
       "days": 16,
-      "month": "Nov",
+      "month": "November",
       "day": 9
     },
     {
       "lng": 32.0,
       "temp": -21,
       "days": 5,
-      "month": "Nov",
+      "month": "November",
       "day": 14
     },
     {
@@ -139,28 +188,28 @@
       "lng": 28.5,
       "temp": -20,
       "days": 4,
-      "month": "Nov",
+      "month": "November",
       "day": 28
     },
     {
       "lng": 27.2,
       "temp": -24,
       "days": 3,
-      "month": "Dec",
+      "month": "December",
       "day": 1
     },
     {
       "lng": 26.7,
       "temp": -30,
       "days": 5,
-      "month": "Dec",
+      "month": "December",
       "day": 6
     },
     {
       "lng": 25.3,
       "temp": -26,
       "days": 1,
-      "month": "Dec",
+      "month": "December",
       "day": 7
     }
   ],
@@ -177,56 +226,64 @@
       "lat": 55.0,
       "survivors": 340000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 25.5,
       "lat": 54.5,
       "survivors": 340000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "labelCenterScale": 0.2
     },
     {
       "lng": 26.0,
       "lat": 54.7,
       "survivors": 320000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 27.0,
       "lat": 54.8,
       "survivors": 300000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 28.0,
       "lat": 54.9,
       "survivors": 280000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 28.5,
       "lat": 55.0,
       "survivors": 240000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 29.0,
       "lat": 55.1,
       "survivors": 210000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 30.0,
       "lat": 55.2,
       "survivors": 180000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 30.3,
@@ -247,7 +304,8 @@
       "lat": 54.9,
       "survivors": 140000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 34.4,
@@ -268,119 +326,136 @@
       "lat": 55.5,
       "survivors": 100000,
       "direction": "A",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 37.6,
       "lat": 55.8,
       "survivors": 100000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "labelOffsetScale": -1
     },
     {
       "lng": 37.5,
       "lat": 55.7,
       "survivors": 98000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 37.0,
       "lat": 55.0,
       "survivors": 97000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 36.8,
       "lat": 55.0,
       "survivors": 96000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "labelOffsetScale": -1
     },
     {
       "lng": 35.4,
       "lat": 55.3,
       "survivors": 87000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "labelOffsetScale": -1
     },
     {
       "lng": 34.3,
       "lat": 55.2,
       "survivors": 55000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "labelOffsetScale": -1
     },
     {
       "lng": 33.3,
       "lat": 54.8,
       "survivors": 37000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "labelOffsetScale": -1
     },
     {
       "lng": 32.0,
       "lat": 54.6,
       "survivors": 24000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "labelOffsetScale": -1
     },
     {
       "lng": 30.4,
       "lat": 54.4,
       "survivors": 20000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "labelOffsetScale": -1
     },
     {
       "lng": 29.2,
       "lat": 54.4,
       "survivors": 20000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "labelOffsetScale": -1
     },
     {
       "lng": 28.5,
       "lat": 54.3,
       "survivors": 20000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 28.3,
       "lat": 54.4,
       "survivors": 20000,
       "direction": "R",
-      "division": 1
+      "division": 1,
+      "label": false
     },
     {
       "lng": 24.0,
       "lat": 55.1,
       "survivors": 60000,
       "direction": "A",
-      "division": 2
+      "division": 2,
+      "label": false
     },
     {
       "lng": 24.5,
       "lat": 55.2,
       "survivors": 60000,
       "direction": "A",
-      "division": 2
+      "division": 2,
+      "label": false
     },
     {
       "lng": 25.5,
       "lat": 54.7,
       "survivors": 60000,
       "direction": "A",
-      "division": 2
+      "division": 2,
+      "merge": false
     },
     {
       "lng": 26.6,
       "lat": 55.7,
       "survivors": 40000,
       "direction": "A",
-      "division": 2
+      "division": 2,
+      "label": false
     },
     {
       "lng": 27.4,
@@ -394,21 +469,25 @@
       "lat": 55.5,
       "survivors": 30000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "labelCenterScale": 0.7,
+      "labelOffsetScale": 2
     },
     {
       "lng": 29.2,
       "lat": 54.3,
       "survivors": 30000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "label": false
     },
     {
       "lng": 28.5,
       "lat": 54.2,
       "survivors": 30000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "label": false
     },
     {
       "lng": 28.3,
@@ -422,84 +501,99 @@
       "lat": 54.5,
       "survivors": 20000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "label": false
     },
     {
       "lng": 26.8,
       "lat": 54.3,
       "survivors": 12000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "labelOffsetScale": -2
     },
     {
       "lng": 26.4,
       "lat": 54.4,
       "survivors": 14000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "labelCenterScale": 0.2,
+      "labelOffsetScale": -2
     },
     {
       "lng": 24.6,
       "lat": 54.5,
       "survivors": 8000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "labelOffsetScale": -2
     },
     {
       "lng": 24.4,
       "lat": 54.4,
       "survivors": 4000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "label": false
     },
     {
       "lng": 24.2,
       "lat": 54.4,
       "survivors": 4000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "labelOffsetScale": -2
     },
     {
       "lng": 24.1,
       "lat": 54.3,
       "survivors": 4000,
       "direction": "R",
-      "division": 2
+      "division": 2,
+      "label": false
     },
     {
       "lng": 24.0,
       "lat": 55.2,
       "survivors": 22000,
       "direction": "A",
-      "division": 3
+      "division": 3,
+      "label": false
     },
     {
       "lng": 24.5,
       "lat": 55.3,
       "survivors": 22000,
       "direction": "A",
-      "division": 3
+      "division": 3,
+      "merge": false,
+      "labelOffsetScale": -2
     },
     {
       "lng": 24.6,
       "lat": 55.8,
       "survivors": 6000,
       "direction": "R",
-      "division": 3
+      "division": 3,
+      "labelOffsetScale": 2,
+      "labelCenterScale": 0.2
     },
     {
       "lng": 24.2,
       "lat": 54.4,
       "survivors": 6000,
       "direction": "R",
-      "division": 3
+      "division": 3,
+      "label": false
     },
     {
       "lng": 24.1,
       "lat": 54.3,
       "survivors": 6000,
       "direction": "R",
-      "division": 3
+      "division": 3,
+      "label": false
     }
   ]
 }

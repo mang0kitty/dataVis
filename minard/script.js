@@ -71,6 +71,10 @@ class Vector {
     this.y = y;
   }
 
+  static fromLatLng({ lat, lng }) {
+    return new Vector(lng, lat);
+  }
+
   /**
    * Adds another vector to this vector, returning a new vector result.
    * @param {Vector} v Another vector
@@ -78,6 +82,15 @@ class Vector {
    */
   add(v) {
     return new Vector(this.x + v.x, this.y + v.y);
+  }
+
+  /**
+   * Subtracts a vector from this vector, returning a new vector result.
+   * @param {Vector} v Another vector
+   * @returns {Vector}
+   */
+  subtract(v) {
+    return new Vector(this.x - v.x, this.y - v.y);
   }
 
   /**
@@ -121,6 +134,7 @@ class Vector {
    * @returns {Vector}
    */
   get perpendicular() {
+    if (!this.y) return new Vector(0, 1);
     return new Vector(1, -this.x / this.y).unit;
   }
 
@@ -140,7 +154,7 @@ class Vector {
   }
 }
 
-function latScale(lat, lng = null, direction = "A") {
+function latScale(lat, lng = null) {
   const scale = new NonLinearScale();
 
   scale
@@ -149,8 +163,6 @@ function latScale(lat, lng = null, direction = "A") {
     .scaleFactorDomain([23, 39])
     .scaleFactorRange([0.4, 1])
     .scaleOffsetRange([15, 0]);
-
-  if (direction === "R") scale.scaleOffsetRange([18.5, 0]);
 
   return scale.scale(lat, lng);
 }
@@ -163,16 +175,16 @@ const lngScale = d3
 const temperatureScale = d3
   .scaleLinear()
   .domain([0, -30])
-  .range([30, 37]);
+  .range([35, 41]);
 
 function widthScale(survivors, lng = null) {
   const scale = new NonLinearScale();
 
   scale
     .domain([0, 422000])
-    .range([0, 7])
+    .range([0.02, 0.7])
     .scaleFactorDomain([23, 39])
-    .scaleFactorRange([0.9, 1]);
+    .scaleFactorRange([1, 0.6]);
 
   return scale.scale(survivors, lng);
 }
@@ -189,40 +201,143 @@ function getNextMovement(data, d, i) {
   return data[i + 1];
 }
 
-/**
- * @param {Number} i
- * @returns {Vector}
- */
-function getMovementVector(data, d, i) {
-  if (!data[i - 1]) return new Vector(0, 0);
-  if (data[i - 1].division !== d.division) return new Vector(0, 0);
+function getMergedMovement(data, movement, force = false) {
+  if (!force && movement.merge === false) return movement;
 
-  return new Vector(d.lng - data[i - 1].lng, d.lat - data[i - 1].lat);
+  const maxDistance = 0.4;
+  const movementVector = Vector.fromLatLng(movement);
+  const nearbyMovements = data
+    .filter(m => m.direction === movement.direction)
+    .filter(
+      m =>
+        m.lng === movement.lng &&
+        Vector.fromLatLng(m).subtract(movementVector).length <= maxDistance
+    );
+  nearbyMovements.sort(
+    (a, b) =>
+      Vector.fromLatLng(a).subtract(movementVector).length -
+      Vector.fromLatLng(b).subtract(movementVector).length
+  );
+
+  const countedDivisions = new Set();
+  const countedMovements = nearbyMovements.filter(m => {
+    if (countedDivisions.has(m.division)) return false;
+    countedDivisions.add(m.division);
+    return true;
+  });
+
+  // Put the largest division in position 0
+  countedMovements.sort((a, b) => b.survivors - a.survivors);
+
+  return {
+    lng: countedMovements[0].lng,
+    lat: countedMovements[0].lat,
+    division: -1, // a merged division
+    direction: movement.direction,
+    survivors: countedMovements
+      .map(m => m.survivors)
+      .reduce((sum, s) => sum + s, 0)
+  };
+}
+
+function getMovementPolygon(data, division, direction) {
+  const movements = data.filter(m => m.division === division);
+
+  // 1. Setup our polygon points array
+  const topPoints = [];
+  const bottomPoints = [];
+
+  movements.forEach((movement, i) => {
+    // If our current movement is in the wrong direction, then don't render it
+    if (movement.direction !== direction) {
+      return;
+    }
+
+    // 2. Move forward over the top of the polygon (line of movement)
+    //    and add these points to the array.
+
+    // 3. Move backward over the bottom of the polygon (line of movement)
+    //    and add these points to the array.
+
+    const nextMovement = getNextMovement(movements, movement, i);
+    if (nextMovement === movement) {
+      return;
+    }
+
+    const mergedStart = getMergedMovement(data, movement);
+    const mergedEnd = getMergedMovement(data, nextMovement, true);
+
+    const startPoint = Vector.fromLatLng(mergedStart);
+    const endPoint = Vector.fromLatLng(mergedEnd);
+    const movementVector = endPoint.subtract(startPoint);
+
+    let perpendicular = movementVector.perpendicular.unit;
+    // Ensure that our perpendicular always points upwards
+    if (perpendicular.y < 0) perpendicular = perpendicular.scale(-1);
+
+    const width = widthScale(mergedStart.survivors, mergedStart.lng);
+    const widthVector = perpendicular.scale(width / 2);
+
+    const topLeft = startPoint.add(widthVector);
+    const topRight = endPoint.add(widthVector);
+    const bottomLeft = startPoint.add(widthVector.scale(-1));
+    const bottomRight = endPoint.add(widthVector.scale(-1));
+
+    topPoints.push(topLeft, topRight);
+    bottomPoints.unshift(bottomRight, bottomLeft);
+  });
+
+  // 4. Convert the points into our polygon points format
+  const points = [
+    Vector.fromLatLng(movements.find(m => m.direction === direction)),
+    ...topPoints,
+    ...bottomPoints
+  ];
+
+  return points
+    .map(p => `${lngScale(p.x).toFixed(4)},${latScale(p.y, p.x).toFixed(4)}`)
+    .join(" ");
 }
 
 function drawLine(data, canvas) {
   const linesLayer = canvas.append("svg:g");
 
+  // linesLayer
+  //   .selectAll("line")
+  //   .data(data)
+  //   .enter()
+  //   .append("svg:line")
+  //   .attr("x1", d => lngScale(d.lng))
+  //   .attr("y1", (d, i) =>
+  //     latScale(d.lat, d.lng, getPreviousMovement(data, d, i).direction)
+  //   )
+  //   .attr("x2", (d, i) => lngScale(getNextMovement(data, d, i).lng))
+  //   .attr("y2", (d, i) =>
+  //     latScale(
+  //       getNextMovement(data, d, i).lat,
+  //       getNextMovement(data, d, i).lng,
+  //       d.direction
+  //     )
+  //   )
+  //   .attr("raw-data", d => JSON.stringify(d))
+  //   .attr("class", d => (d.direction == "A" ? "advance-line" : "retreat-line"))
+  //   .attr("stroke-width", d => widthScale(d.survivors, d.lng));
+
   linesLayer
-    .selectAll("line")
-    .data(data)
+    .selectAll("polygon")
+    .data([
+      { division: 1, direction: "R" },
+      { division: 2, direction: "R" },
+      { division: 3, direction: "R" },
+      { division: 1, direction: "A" },
+      { division: 2, direction: "A" },
+      { division: 3, direction: "A" }
+    ])
     .enter()
-    .append("svg:line")
-    .attr("x1", d => lngScale(d.lng))
-    .attr("y1", (d, i) =>
-      latScale(d.lat, d.lng, getPreviousMovement(data, d, i).direction)
-    )
-    .attr("x2", (d, i) => lngScale(getNextMovement(data, d, i).lng))
-    .attr("y2", (d, i) =>
-      latScale(
-        getNextMovement(data, d, i).lat,
-        getNextMovement(data, d, i).lng,
-        d.direction
-      )
-    )
+    .append("svg:polygon")
+    .attr("points", d => getMovementPolygon(data, d.division, d.direction))
     .attr("raw-data", d => JSON.stringify(d))
-    .attr("class", d => (d.direction == "A" ? "advance-line" : "retreat-line"))
-    .attr("stroke-width", d => widthScale(d.survivors, d.lng));
+    .attr("class", d => (d.direction == "A" ? "advance-line" : "retreat-line"));
 
   // const debugLayer = linesLayer.append("svg:g");
 
@@ -253,68 +368,79 @@ function drawLine(data, canvas) {
   //   .attr("stroke-width", "0.5px")
   //   .attr("stroke", "magenta");
 
-  linesLayer
-    .selectAll("polygon")
-    .data(data)
-    .enter()
-    .append("polygon")
-    .attr("raw-data", d => JSON.stringify(d))
-    //.attr("class", d => (d.direction == "A" ? "advance-line" : "retreat-line"))
-    .attr("stroke-width", 0)
-    .attr("fill", "cyan")
-    .attr("v-before", (d, i) => getMovementVector(data, d, i).toString())
-    .attr("v-after", (d, i) => {
-      const nextMovement = getNextMovement(data, d, i);
-      if (d === nextMovement) return "";
-      const nextMovementVector = getMovementVector(data, nextMovement, i + 1);
-      return nextMovementVector.toString();
-    })
-    .attr("angle-between", (d, i) => {
-      const movementVector = getMovementVector(data, d, i);
-      const nextMovement = getNextMovement(data, d, i);
-      if (d === nextMovement) return "";
-      const nextMovementVector = getMovementVector(data, nextMovement, i + 1);
-
-      return (movementVector.angle(nextMovementVector) * 180) / Math.PI;
-    })
-    .attr("points", (d, i) => {
-      const movementVector = getMovementVector(data, d, i);
-      const nextMovement = getNextMovement(data, d, i);
-      if (d === nextMovement) return "";
-      const nextMovementVector = getMovementVector(data, nextMovement, i + 1);
-
-      const pcenter = new Vector(d.lng, d.lat);
-      const pend = pcenter.add(movementVector.perpendicular.scale(0.3));
-      const pstart = pcenter.add(nextMovementVector.perpendicular.scale(0.3));
-
-      return [
-        `${lngScale(pcenter.x)},${latScale(pcenter.y, pcenter.x, d.direction)}`,
-        `${lngScale(pend.x)},${latScale(pend.y, pcenter.x, d.direction)}`,
-        `${lngScale(pstart.x)},${latScale(
-          pstart.y,
-          pcenter.x,
-          nextMovement.direction
-        )}`
-      ].join(" ");
-    });
-
   return linesLayer;
 }
+
 function drawSurvivorCount(data, canvas) {
-  const survivorsLayer = canvas.append("svg:g");
+  const survivorsLayer = canvas.append("svg:g").attr("id", "survivors-count");
   formatComma = d3.format(",");
+
+  survivorsLayer
+    .selectAll("path")
+    .data(data)
+    .enter()
+    .append("svg:path")
+    .attr("id", (d, i) => `division-${d.division}-${d.direction}-${i}`)
+    .attr("fill", "none")
+    .attr("stroke", "none")
+    .attr("d", (movement, i) => {
+      const nextMovement = getNextMovement(data, movement, i);
+      if (nextMovement === movement) {
+        return;
+      }
+
+      const mergedStart = getMergedMovement(data, movement);
+      const mergedEnd = getMergedMovement(data, nextMovement);
+
+      const startPoint = Vector.fromLatLng(mergedStart);
+      const endPoint = Vector.fromLatLng(mergedEnd);
+      const movementVector = endPoint.subtract(startPoint);
+
+      let perpendicular = movementVector.perpendicular.unit;
+      // Ensure that our perpendicular always points upwards
+      if (perpendicular.y < 0) perpendicular = perpendicular.scale(-1);
+
+      const width = widthScale(mergedStart.survivors * 1.5, mergedStart.lng);
+      const widthVector = perpendicular
+        .scale(width / 2)
+        .scale(movement.labelOffsetScale || 1);
+
+      const centerVector = startPoint.add(
+        movementVector.scale(movement.labelCenterScale || 0.5)
+      );
+      const textVector = centerVector.add(
+        perpendicular.scale(movement.labelOffsetScale || 1).scale(4)
+      );
+
+      const instructions = [
+        `M${lngScale(centerVector.add(widthVector).x).toFixed(3)},${latScale(
+          centerVector.add(widthVector).y,
+          centerVector.add(widthVector).x
+        ).toFixed(3)}`,
+        `L${lngScale(textVector.x).toFixed(3)},${latScale(
+          textVector.y,
+          textVector.x
+        ).toFixed(3)}`
+      ];
+
+      return instructions.join(" ");
+    });
+
   survivorsLayer
     .selectAll("text")
     .data(data)
     .enter()
     .append("text")
-    .attr("x", d => lngScale(d.lng))
-    .attr("y", d => latScale(d.lat, d.lng))
     .attr("class", "survivor-count")
-    .text(d => formatComma(d.survivors));
+    .append("textPath")
+    .attr("href", (d, i) => `#division-${d.division}-${d.direction}-${i}`)
+    .text(d =>
+      d.label === false ? "" : formatComma(getMergedMovement(data, d).survivors)
+    );
 
   return survivorsLayer;
 }
+
 function drawCityText(data, canvas) {
   const citiesLayer = canvas.append("svg:g");
 
@@ -323,9 +449,12 @@ function drawCityText(data, canvas) {
     .data(data)
     .enter()
     .append("text")
-    .attr("x", d => lngScale(d.lng))
-    .attr("y", d => latScale(d.lat, d.lng))
+    .attr("x", d => lngScale(d.lng + (d.lngOffset || 0)))
+    .attr("y", d =>
+      latScale(d.lat + (d.latOffset || 0), d.lng + (d.lngOffset || 0))
+    )
     .attr("class", "city-text")
+    .style("font-size", d => d.font)
     .text(d => d.name);
 
   return citiesLayer;
@@ -338,11 +467,23 @@ function drawCanvas() {
     .attr("viewBox", "0 0 100 45")
     .attr("class", "movementCanvas");
 }
+
 function drawTemperature(data, canvas) {
   const temperatureLayer = canvas.append("svg:g");
 
-  const line = temperatureLayer
-    .selectAll("line")
+  temperatureLayer
+    .selectAll("line.temperature-line-shadow")
+    .data(data)
+    .enter()
+    .append("svg:line")
+    .attr("x1", d => lngScale(d.lng))
+    .attr("y1", d => temperatureScale(d.temp))
+    .attr("x2", (d, i) => lngScale((data[i + 1] || d).lng))
+    .attr("y2", (d, i) => temperatureScale((data[i + 1] || d).temp))
+    .attr("class", "temperature-line-shadow");
+
+  temperatureLayer
+    .selectAll("line.temperature-line")
     .data(data)
     .enter()
     .append("svg:line")
@@ -352,7 +493,7 @@ function drawTemperature(data, canvas) {
     .attr("y2", (d, i) => temperatureScale((data[i + 1] || d).temp))
     .attr("class", "temperature-line");
 
-  const text = temperatureLayer
+  temperatureLayer
     .selectAll("text.temp-text")
     .data(data)
     .enter()
@@ -385,9 +526,7 @@ function drawTemperatureLines(data, canvas) {
     .attr("x1", d => lngScale(d.lng))
     .attr("y1", d => temperatureScale(d.temp))
     .attr("x2", d => lngScale(d.lng))
-    .attr("y2", d =>
-      latScale(getRetreatLatitute(retreatData, d.lng), d.lng, "R")
-    )
+    .attr("y2", d => latScale(getRetreatLatitute(retreatData, d.lng), d.lng))
     .attr("class", "temperature-connector-line");
 }
 function drawTempHorizontalLine(canvas) {
@@ -398,7 +537,7 @@ function drawTempHorizontalLine(canvas) {
     .data([0, -10, -20, -30])
     .enter()
     .append("svg:line")
-    .attr("x1", d => lngScale(26.7))
+    .attr("x1", d => (d != 0 ? lngScale(26.7) : lngScale(0)))
     .attr("y1", d => temperatureScale(d))
     .attr("x2", d => lngScale(37.6))
     .attr("y2", d => temperatureScale(d))
@@ -421,24 +560,12 @@ function drawThermometer(canvas) {
     .append("text")
     .attr("x", lngScale(37.75))
     .attr("y", d =>
-      typeof d[0] == "number" ? temperatureScale(d[0]) : temperatureScale(3)
+      typeof d[0] == "number" ? temperatureScale(d[0]) : temperatureScale(5)
     )
     .attr("class", "thermometer-text")
-    .text(d => `${d[0]} ${d[1]}  ${d[2]}`);
-
-  // const thermonometerText = thermometerLayer.insert(
-  //   "text",
-  //   ".thermometer-text"
-  // );
-  // thermonometerText
-  //   .selectAll("text")
-  //   .data([["°R", "°C", "°F"]])
-  //   .enter()
-  //   .append("text")
-  //   .attr("x", lngScale(37.75))
-  //   .attr("y", temperatureScale(2))
-  //   .attr("class", "thermometer-unit-text")
-  //   .text(d => `${d[0]} ${d[1]}  ${d[2]}`);
+    .text(
+      d => `${leftPad(d[0], 6)}  ${leftPad(d[1], 6)}   ${leftPad(d[2], 6)}`
+    );
 }
 function getRetreatLatitute(data, lng) {
   const left = data.find(x => x.lng <= lng);
@@ -447,27 +574,238 @@ function getRetreatLatitute(data, lng) {
     .reverse()
     .find(x => x.lng >= lng);
 
-  const dlng = left.lng - right.lng;
+  const mergedLeft = getMergedMovement(data, left);
+  const mergedRight = getMergedMovement(data, right);
+
+  const dlng = mergedLeft.lng - mergedRight.lng;
   if (!dlng) {
+    console.log("found temp location at", mergedLeft);
     return left.lat;
   }
 
-  const dlat = right.lat - left.lat;
+  console.log(
+    "interpolating temp location for",
+    lng,
+    "between",
+    mergedLeft,
+    mergedRight
+  );
+
+  const dlat = mergedLeft.lat - mergedRight.lat;
   const gradient = dlat / dlng;
 
-  return gradient * (lng - right.lng) + right.lat;
+  return gradient * (lng - mergedRight.lng) + mergedRight.lat;
+}
+function drawMainTitle(canvas) {
+  const text = [
+    {
+      fontSize: "1.4px",
+      x: 7,
+      dy: 1.5,
+      text: "Figurative Map"
+    },
+    {
+      fontSize: "1px",
+      x: 15,
+      dy: 0,
+      text: "of the successive losses of men in the"
+    },
+    {
+      fontSize: "1.4px",
+      x: 29.5,
+      dy: 0,
+      text: "French Army"
+    },
+    {
+      fontSize: "1px",
+      x: 36.5,
+      dy: 0,
+      text: "in the"
+    },
+    {
+      fontSize: "1.4px",
+      x: 39,
+      dy: 0,
+      text: "Russian Campaign 1812 - 1813"
+    },
+    {
+      fontSize: "1.2px",
+      x: 15,
+      dy: 1.5,
+      text: "Drawn by M."
+    },
+    {
+      fontSize: "1.5px",
+      x: 21.3,
+      dy: 0,
+      text: "Minard, "
+    },
+    {
+      fontSize: "1.2px",
+      x: 26,
+      dy: 0,
+      text: "Inspector General of Bridges and Roads (retired)."
+    },
+    {
+      fontSize: "1.px",
+      x: 49,
+      dy: 0.5,
+      text: "Paris, November 20, 1869."
+    },
+    {
+      fontSize: "1px",
+      x: 7,
+      dy: 1.5,
+      text:
+        "The numbers of men present are represented by the widths of the colored zones at a rate of one millimeter for every ten thousand men; they are further written"
+    },
+    {
+      fontSize: "1px",
+      x: 6.3,
+      dy: 1.5,
+      text:
+        "across the zones. The red designates the men who enter Russia, the black those who leave it. — The information which has served to draw up the map has been"
+    },
+    {
+      fontSize: "1px",
+      x: 7,
+      dy: 1.5,
+      text:
+        "extracted from the works of M. M. Thiers, de Ségur, de Fezensac, de Chambray and the unpublished diary of Jacob, the pharmacist of the Army since"
+    },
+    {
+      fontSize: "1px",
+      x: 6.2,
+      dy: 1.5,
+      text:
+        "October 28th. In order to better judge with the eye the diminution of the army, I have assumed that the troops of Prince Jérôme and of Marshal Davout, who had"
+    },
+    {
+      fontSize: "1px",
+      x: 14.9,
+      dy: 1.5,
+      text:
+        "been detached at Minsk and Mogilev and have rejoined near Orsha and Vitebsk, had always marched with the army."
+    }
+  ];
+
+  const titleText = canvas.append("svg:text").attr("class", "title-text");
+  titleText
+    .selectAll("tspan")
+    .data(text)
+    .enter()
+    .append("svg:tspan")
+    .attr("x", d => d.x)
+    .attr("dy", d => d.dy)
+    .style("font-size", d => d.fontSize)
+    .text(d => d.text);
+}
+function drawTemperatureTitle(canvas) {
+  const text = [
+    {
+      fontSize: "1.1px",
+      x: 20,
+      dy: 33.5,
+      text: "GRAPHIC TABLE",
+      font: "Georgia, Times New Roman, Times, serif",
+      style: "italic"
+    },
+    {
+      fontSize: "1.1px",
+      x: 29,
+      dy: 0,
+      text: "of the temperature in degrees below zero of the ",
+      font: "Playball",
+      style: "normal"
+    },
+    {
+      fontSize: "1.3px",
+      x: 48.5,
+      dy: 0,
+      text: "Réaumur",
+      style: "italic"
+    },
+    {
+      fontSize: "1.3px",
+      x: 53.5,
+      dy: 0,
+      text: "thermometer",
+      font: "Playball",
+      style: "normal"
+    }
+  ];
+  const tempTitleText = canvas
+    .append("svg:text")
+    .attr("class", "temperature-title-text");
+  tempTitleText
+    .selectAll("tspan")
+    .data(text)
+    .enter()
+    .append("svg:tspan")
+    .attr("x", d => d.x)
+    .attr("dy", d => d.dy)
+    .style("font-family", d => d.font)
+    .style("font-size", d => d.fontSize)
+    .style("font-style", d => d.style)
+    .text(d => d.text);
+  // const temperatureTitle = canvas
+  //   .append("svg:text")
+  //   .attr("class", "temperature-title")
+  //   .style("font-size", "1.3px")
+  //   .append("svg:tspan")
+  //   .attr("x", 20)
+  //   .attr("y", 34)
+  //   .text(text);
+}
+function drawCanvasSeperatorLines(canvas) {
+  const canvasSeperatorLineLayer = canvas.append("svg:g");
+  canvasSeperatorLineLayer
+    .append("line")
+    .attr("class", "canvas-seperator-line")
+    .attr("x1", 0)
+    .attr("y1", 32)
+    .attr("x2", 100)
+    .attr("y2", 32);
+
+  canvasSeperatorLineLayer
+    .append("line")
+    .attr("x1", 0)
+    .attr("y1", 32.15)
+    .attr("x2", 100)
+    .attr("y2", 32.15)
+    .attr("class", "canvas-seperator-line");
+
+  canvasSeperatorLineLayer
+    .append("line")
+    .attr("x1", 25.2)
+    .attr("y1", 3.7)
+    .attr("x2", 40)
+    .attr("y2", 3.7)
+    .attr("class", "title-format-line");
+}
+
+function leftPad(number, length) {
+  number = `${number}`;
+  while (number.length < length) number = ` ${number}`;
+
+  return number;
 }
 
 function renderGraph(data) {
   const canvas = drawCanvas();
-  const troopLinesLayer = drawLine(data.movements, canvas);
-  troopLinesLayer.selectAll("line.advance-line").raise();
-  drawCityText(data.cities, canvas);
-  drawSurvivorCount(data.movements, canvas);
+  drawMainTitle(canvas);
+  drawTemperatureTitle(canvas);
   drawTemperature(data.temperatures, canvas);
   drawTemperatureLines(data, canvas);
   drawTempHorizontalLine(canvas);
   drawThermometer(canvas);
+
+  const troopLinesLayer = drawLine(data.movements, canvas);
+  troopLinesLayer.selectAll("line.advance-line").raise();
+  drawCityText(data.cities, canvas);
+  drawSurvivorCount(data.movements, canvas);
+
+  drawCanvasSeperatorLines(canvas);
 }
 function loadData() {
   return fetch("data.json").then(response => response.json());

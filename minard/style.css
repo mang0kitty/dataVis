@@ -2,24 +2,26 @@ body {
   width: 100%;
   min-height: 100%;
 }
+
 .movementCanvas,
 .tempCanvas {
-  width: 100%;
-  height: 50%;
-  float: center;
+  margin: 40px;
   border-style: solid;
   border-width: 1px;
 }
 .city-text {
-  font-size: 0.75px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
 }
 
 .advance-line {
   stroke: red;
+  stroke-width: 0;
   fill: red;
 }
 .retreat-line {
   stroke: black;
+  stroke-width: 0;
   fill: black;
 }
 .survivor-count {
@@ -30,12 +32,16 @@ body {
   stroke: black;
   stroke-width: 0.05px;
 }
+.temperature-line-shadow {
+  stroke: lightgrey;
+  stroke-width: 0.3px;
+}
 .temperature-connector-line {
   stroke: grey;
   stroke-width: 0.03px;
 }
 .temp-text {
-  font-size: 0.5px;
+  font-size: 0.7px;
 }
 .temperature-horizontal-line {
   stroke: grey;
@@ -43,9 +49,27 @@ body {
 }
 .thermometer-text {
   font-size: 0.65px;
-  font-family: "Playball";
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bold;
+  opacity: 0.8;
+  white-space: pre;
 }
 .thermometer-unit-text {
   font-size: 0.65px;
   font-family: "Playball";
+}
+.canvas-seperator-line {
+  stroke: black;
+  stroke-width: 0.05;
+}
+.title-format-line {
+  stroke: black;
+  stroke-width: 0.05;
+}
+.title-text {
+  font-size: 1.4px;
+  font-family: "Playball";
+}
+.temperature-title-text {
+  font-style: italic;
 }
