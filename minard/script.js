@@ -297,27 +297,6 @@ function getMovementPolygon(data, division, direction) {
 function drawLine(data, canvas) {
   const linesLayer = canvas.append("svg:g");
 
-  // linesLayer
-  //   .selectAll("line")
-  //   .data(data)
-  //   .enter()
-  //   .append("svg:line")
-  //   .attr("x1", d => lngScale(d.lng))
-  //   .attr("y1", (d, i) =>
-  //     latScale(d.lat, d.lng, getPreviousMovement(data, d, i).direction)
-  //   )
-  //   .attr("x2", (d, i) => lngScale(getNextMovement(data, d, i).lng))
-  //   .attr("y2", (d, i) =>
-  //     latScale(
-  //       getNextMovement(data, d, i).lat,
-  //       getNextMovement(data, d, i).lng,
-  //       d.direction
-  //     )
-  //   )
-  //   .attr("raw-data", d => JSON.stringify(d))
-  //   .attr("class", d => (d.direction == "A" ? "advance-line" : "retreat-line"))
-  //   .attr("stroke-width", d => widthScale(d.survivors, d.lng));
-
   linesLayer
     .selectAll("polygon")
     .data([
@@ -333,35 +312,6 @@ function drawLine(data, canvas) {
     .attr("points", d => getMovementPolygon(data, d.division, d.direction))
     .attr("raw-data", d => JSON.stringify(d))
     .attr("class", d => (d.direction == "A" ? "advance-line" : "retreat-line"));
-
-  // const debugLayer = linesLayer.append("svg:g");
-
-  // debugLayer
-  //   .selectAll("line.debug")
-  //   .data(data.slice(0, 8))
-  //   .enter()
-  //   .append("line")
-  //   .attr("class", "debug")
-  //   .attr("x1", (d, i) =>
-  //     lngScale(
-  //       getMovementVector(data, d, i).perpendicular.add(
-  //         new Vector(d.lng, d.lat)
-  //       ).x
-  //     )
-  //   )
-  //   .attr("y1", (d, i) =>
-  //     latScale(
-  //       getMovementVector(data, d, i).perpendicular.add(
-  //         new Vector(d.lng, d.lat)
-  //       ).y,
-  //       d.lng,
-  //       d.direction
-  //     )
-  //   )
-  //   .attr("x2", d => lngScale(d.lng))
-  //   .attr("y2", d => latScale(d.lat, d.lng, d.direction))
-  //   .attr("stroke-width", "0.5px")
-  //   .attr("stroke", "magenta");
 
   return linesLayer;
 }
