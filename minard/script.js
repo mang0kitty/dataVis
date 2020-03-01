@@ -1,8 +1,3 @@
-// const latScale = d3
-//   .scaleLinear()
-//   .domain([56, 54])
-//   .range([0, 30]);
-
 class NonLinearScale {
   constructor() {
     this._domain = [0, 1];
@@ -726,7 +721,7 @@ function drawTemperatureTitle(canvas) {
       style: "italic"
     },
     {
-      fontSize: "1.3px",
+      fontSize: "1.1px",
       x: 53.5,
       dy: 0,
       text: "thermometer",
@@ -748,14 +743,6 @@ function drawTemperatureTitle(canvas) {
     .style("font-size", d => d.fontSize)
     .style("font-style", d => d.style)
     .text(d => d.text);
-  // const temperatureTitle = canvas
-  //   .append("svg:text")
-  //   .attr("class", "temperature-title")
-  //   .style("font-size", "1.3px")
-  //   .append("svg:tspan")
-  //   .attr("x", 20)
-  //   .attr("y", 34)
-  //   .text(text);
 }
 function drawCanvasSeperatorLines(canvas) {
   const canvasSeperatorLineLayer = canvas.append("svg:g");
